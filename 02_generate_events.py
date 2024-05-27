@@ -27,7 +27,7 @@ with open(f"{working_dir}/workflow.yaml", "r") as file:
 parser = argparse.ArgumentParser()
 parser.add_argument("-sm",action="store_true",help="Generate events only at the SM benchmark")
 parser.add_argument("-supp",action="store_true",help="Generate events at a non-SM benchmark")
-parser.add_argument("-supp_id",help="Index of benchmark to generate events")
+parser.add_argument("-supp_id",help="Index of non_SM benchmark to generate events")
 parser.add_argument("-b",action="store_true",help="Generate background events (no reweighting needed)")
 
 args = parser.parse_args()

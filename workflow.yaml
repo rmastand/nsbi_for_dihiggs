@@ -15,7 +15,7 @@ delphes:
     output_file: /pscratch/sd/r/rmastand/hh_batching/post_delphes_data/delphes
     long_term_storage_dir: /global/cfs/cdirs/m3246/rmastand/hh_prod/post_delphes_data
     
-# Estimators
+# Sampling (step 4)
 sampling:
     input_dir: /global/cfs/cdirs/m3246/rmastand/hh_prod/post_delphes_data/
     output_dir: /global/cfs/cdirs/m3246/rmastand/hh_prod/samples/

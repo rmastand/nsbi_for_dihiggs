@@ -22,4 +22,25 @@ Most of the event generation (steps 1-4) is done with [MadMiner](https://github.
 
 There are run cards for both the 14 TeV and 100 TeV collider setups. Signal runs cards have no cuts on the decay products, since MadGraph is only used for the $gg \rightarrow hh$ decays, and MadSpin in used for the higgs decays. Background run cards have stricted angular and mass window cuts corresponding to those specified in the main paper. 
 
-The script can be run with various flags set. As an example, you could generate events at the non-SM banchmark 2 by running `python 02_generate_events.py -supp -supp_id 2`
+The script can be run with various flags set. As an example, you could generate events at the non-SM benchmark 2 by running `python 02_generate_events.py -supp -supp_id 2`. You can specify the desired number of Madgraph runs in the `workflow.yaml`.
+
+3. `03a_read_delphes.py`: Run Delphes on the previously generated files and make selection cuts on the events. 
+
+This script assumes that you have a specific directory setup, namely that the outputs of step 2 are in `</path_from_workflow_yaml_delphes_input_dir_prefix/process_id/batch_<i>/`. `process_id` is an argument to the script (`signal_sm`, `signal_supp` for non-SM benchmarks, or `background_0`), and the batch is indexed by an integer. That directory can contain any number of Madgraph output directories `run_j`. 
+
+n.b. This directory setup must be manually created, but I have found that it works well when generating a large number of events. especially when events are generated in parallel on a cluster setup with separate scratch and long-term storage directories. 
+
+The script can be run with various flags set. As an example, you could run Delphes and apply kinematic cuts on events over 20 MadGraph runs that have been generated at the non-SM benchmark 2 by running `python 03a_read_delphes.py -p signal_supp -supp_id 2 -b 0 -start 0 -stop 20`. 
+
+Finally, compile events over batches and all signal benchmarks with `python 03b_compile.py -p signal`. 
+
+4. `04_make_samples.ipynb`: generate samples of signal events at arbitrary benchmark points, using MadMiner. These samples will be used for network training. You can generate multiple datasets (identified by `parameter_code`) depending on Which SMEFT Wilson coefficients you want to vary.
+
+
+5. `05_train_network.py`: Train the neural network. Specify the dataset that you want to run over be changing `sampling.output_dir` in `workflow.yaml` and by providing the correct `parameter_code` for the argument. Both simple dense nets and Bayesian nets are implemented. Network architecture and hyperparameters are hard-coded in the script, but they are all saved out into a config `yaml` with a particular run id (`rid`, specified in the arguments). 
+
+As described in the paper, there are 3 classifiers that need to be trained: (1) likelihood ratio of BSM signal to SM signal, (2) likelihood ratio of BSM signal to background, (3) likelihood ratio of background to SM signal. 
+
+Trainable kinematic features are:  $m_{hh}$, ${p_T}_{bb}$, ${p_T}_{aa}$, $\Delta R_{aa}$, $\Delta R_{bb}$, ${p_T}_{a0}$, ${p_T}_{a1}$, ${p_T}_{b0}$, ${p_T}_{b1}$. Train on the first $i$ features with the flag `-f`.
+
+As an example, you could train the classifier 1 on a set of data that only varies over the first Wilson coefficient, using 5 kinemtic features, with `python 05_train_network.py -p c0 -rid test_run -f 5 -c1 -s 1
