@@ -1,0 +1,2 @@
+import model SMEFTatNLO-LO
+generate p p > H H   QED=2 QCD=2 NP=2 [QCD]

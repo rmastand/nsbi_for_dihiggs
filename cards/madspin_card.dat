@@ -1,0 +1,24 @@
+#************************************************************
+#*                        MadSpin                           *
+#*                                                          *
+#*    P. Artoisenet, R. Frederix, R. Rietkerk, O. Mattelaer * 
+#*                                                          *
+#*    Part of the MadGraph5_aMC@NLO Framework:              *
+#*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+#*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
+#*                                                          *
+#*    Manual:                                               *
+#*    cp3.irmp.ucl.ac.be/projects/madgraph/wiki/MadSpin     *
+#*                                                          *
+#************************************************************
+
+import model heft /global/homes/r/rmastand/MG5_aMC_v3_5_1/models/heft/restrict_default.dat --bypass_check
+set spinmode None          # Use one of the madspin special mode
+set max_weight_ps_point 400  # number of PS to estimate the maximum for each event
+
+# specify the decay for the final state particles
+decay h > b b~
+decay h > a a
+
+launch
+
