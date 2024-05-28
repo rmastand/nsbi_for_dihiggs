@@ -3,7 +3,7 @@ This is the repository for the code used in paper "Constraining the Higgs Potent
 
 Authors: Radha Mastandrea, Benjamin Nachman, and Tilman Plehn
 
-Dataset: [https://zenodo.org/uploads/11222924](https://zenodo.org/uploads/11222924)
+Dataset: https://zenodo.org/records/11222924
 
 ### General version notes
 - Use Python 3.8 and MadGraph 3.5.1 with this repository. 
