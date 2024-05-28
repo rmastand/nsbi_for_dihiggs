@@ -1,5 +1,5 @@
 # Neural Simulation-based Inference: Full Analysis Pipeline
-This is the repository for the code used in paper "Constraining the Higgs Potential with Neural Simulation-based Inference for Di-Higgs Production" ()
+This is the repository for the code used in paper "Constraining the Higgs Potential with Neural Simulation-based Inference for Di-Higgs Production" (https://arxiv.org/abs/2405.15847)
 
 Authors: Radha Mastandrea, Benjamin Nachman, and Tilman Plehn
 
