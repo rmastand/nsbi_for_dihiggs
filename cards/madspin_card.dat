@@ -12,7 +12,7 @@
 #*                                                          *
 #************************************************************
 
-import model heft /global/homes/r/rmastand/MG5_aMC_v3_5_1/models/heft/restrict_default.dat --bypass_check
+import model heft --bypass_check
 set spinmode None          # Use one of the madspin special mode
 set max_weight_ps_point 400  # number of PS to estimate the maximum for each event
 
